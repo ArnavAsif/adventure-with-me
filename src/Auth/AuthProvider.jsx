@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../utilities/firebase.init';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null)
@@ -8,6 +8,9 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user , setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+
+
+    const gitHubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
 
     // sign up
@@ -34,6 +37,12 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider);
     }
+    // github login
+
+    const githubLogin = () => {
+        setLoading(true)
+        return signInWithPopup(auth, gitHubProvider);
+    }
 
     // disconnect user
 
@@ -54,7 +63,8 @@ const AuthProvider = ({ children }) => {
         signUpUser,
         signInUser,
         signOutUser,
-        googleLogin
+        googleLogin,
+        githubLogin
     }
     return (
 

@@ -5,20 +5,35 @@ import { useContext } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../utilities/firebase.init";
+import { toast } from "react-toastify";
 
 
 const Register = () => {
-    const { signUpUser } = useContext(AuthContext)
+    const { signUpUser, googleLogin, githubLogin } = useContext(AuthContext)
     const navigate = useNavigate();
 
     const handleGoogleRegister = () => {
-        // Your Google register logic here
-        console.log("Google Register");
+        googleLogin()
+            .then(result => {
+                toast.success('Login with Google Success')
+                console.log(result.user)
+                navigate('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     const handleGithubRegister = () => {
-        // Your GitHub register logic here
-        console.log("GitHub Register");
+        githubLogin()
+            .then(result => {
+                toast.success('Login with GitHub Success')
+                console.log(result.user)
+                navigate('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     const handleSubmit = (e) => {
@@ -30,23 +45,23 @@ const Register = () => {
         // Your register logic here
         console.log(email, password);
         signUpUser(email, password)
-        .then(result => {
-            updateProfile(auth.currentUser, {
-                displayName: name,
-                photoURL: photoUrl
+            .then(result => {
+                updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: photoUrl
+                })
+                    .then(() => {
+                        // profile update
+                    })
+                    .catch(err =>
+                        console.log(err)
+                    )
+                console.log(result.user);
+                navigate('/login')
             })
-            .then(()=>{
-                // profile update
+            .catch(error => {
+                console.log(error)
             })
-            .catch(err =>
-                console.log(err)
-            )
-            console.log(result.user);
-            navigate('/login')
-        })
-        .catch(error => {
-            console.log(error)
-        })
     };
 
     return (

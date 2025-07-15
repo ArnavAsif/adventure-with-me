@@ -9,7 +9,8 @@ const Login = () => {
     
     
 
-    const { signInUser, googleLogin} = useContext(AuthContext)
+    const { signInUser, googleLogin, githubLogin} = useContext(AuthContext)
+    console.log(githubLogin)
 
     const navigate = useNavigate();
 
@@ -26,8 +27,15 @@ const Login = () => {
     };
 
     const handleGithubLogin = () => {
-        // Your GitHub login logic here
-        console.log("GitHub Login");
+        githubLogin()
+       .then(result=>{
+        toast.success('Login with GitHub Success')
+        console.log(result.user)
+        navigate('/')
+       })
+       .catch(err =>{
+        console.log(err)
+       })
     };
     const handleLogin = e => {
         e.preventDefault();
