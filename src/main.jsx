@@ -13,6 +13,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import UserProfile from './components/UserProfile.jsx';
 import PrivateRoutes from './privateRoutes/PrivateRoutes.jsx';
+import ExploreMore from './components/ExploreMore.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: '/userProfile',
         element: <PrivateRoutes><UserProfile></UserProfile></PrivateRoutes>
+      },
+      {
+        path: '/explore/:id',
+        element: <ExploreMore></ExploreMore>,
+        loader: ()=> fetch('../public/adventureData.json')
       }
     ]
   },

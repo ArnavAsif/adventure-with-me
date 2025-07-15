@@ -1,70 +1,55 @@
+
+import { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCreative, Autoplay } from 'swiper/modules';
+import { Virtual, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
-import 'swiper/css/effect-creative';
-import { useContext } from 'react';
+import 'swiper/css/navigation';
 import { HomeDataContext } from './HomePage';
-const HomeDetails = () => {
+import { Link } from 'react-router';
 
+const HomeDetails = () => {
     const { adventureData } = useContext(HomeDataContext);
-    console.log(adventureData)
+
+
 
     return (
-        <div className="py-12 px-4">
-            <h2 className="text-3xl text-center mb-8">Creative Slider</h2>
+        <div className="py-12 px-4 text-center">
+            <h2 className="text-3xl text-white mb-8">Virtual Slider (Adventure)</h2>
 
             <Swiper
-                effect="creative"
-                grabCursor={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                loop={true}
-                creativeEffect={{
-                    prev: {
-                        shadow: true,
-                        translate: ['-120%', 0, -500],
-                    },
-                    next: {
-                        shadow: true,
-                        translate: ['120%', 0, -500],
-                    },
-                }}
-                modules={[EffectCreative, Autoplay]}
-                className="max-w-md mx-auto"
+                modules={[Virtual, Navigation]}
+                slidesPerView={2}
+                spaceBetween={30}
+                navigation
+                virtual
+                className="max-w-4xl mx-auto"
             >
-                {
-                    adventureData.map(data => <SwiperSlide>
-                        <div className="card bg-base-100 w-96 shadow-sm">
-                            <figure className="px-10 pt-10">
-                                <img
-                                    src={data.image}
-                                    alt="Shoes"
-                                    className="rounded-xl" />
-                            </figure>
-                            <div className="card-body items-center text-center">
-                                <h2 className="card-title">{data.adventureTitle}</h2>
-                                <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                                <div className="card-actions">
-                                    <button className="btn btn-primary">Buy Now</button>
-                                </div>
+                {adventureData.map((data, index) => (
+                    <SwiperSlide key={index} virtualIndex={index}>
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+                            <img
+                                src={data.image}
+                                alt={data.adventureTitle}
+                                className="h-48 w-full object-cover"
+                            />
+                            <div className="p-4 flex-1 flex flex-col">
+                                <h3 className="text-xl font-semibold mb-2">{data.adventureTitle}</h3>
+                                <ul className="text-sm text-gray-600 flex-1">
+                                    {data.ecoFriendlyFeatures?.map((feature, index) => (
+                                        <li key={index}>🌱 {feature}</li>
+                                    ))}
+                                </ul>
+                                <Link className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" to={`/explore/${data.id}`}>
+                                    <button >Explore Now</button>
+                                </Link>
                             </div>
                         </div>
-                    </SwiperSlide>)
-                }
-
-                {/* <SwiperSlide>
-                    <div className="bg-green-900 p-16 rounded-xl text-center">Slide 2</div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg-purple-900 p-16 rounded-xl text-center">Slide 3</div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className="bg-teal-900 p-16 rounded-xl text-center">Slide 4</div>
-                </SwiperSlide> */}
+                    </SwiperSlide>
+                ))}
             </Swiper>
+
+
         </div>
     );
 };

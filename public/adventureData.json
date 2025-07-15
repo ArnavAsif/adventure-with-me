@@ -117,7 +117,7 @@
     "image": "https://images.rewildingbritain.org.uk/images/walkers-at-wild-ennerdale-c-wild-ennerdale.jpg?auto=format&crop=focalpoint&domain=images.rewildingbritain.org.uk&fit=crop&fp-x=0.5251&fp-y=0.6743&h=1080&ixlib=php-3.3.1&q=82&usm=20&w=1920",
     "categoryName": "Volunteer",
     "shortDescription": "Help plant native trees and restore wildlife habitats.",
-    "adventureCost": 0,
+    "adventureCost": 50,
     "bookingAvailability": true,
     "location": "Scottish Highlands, UK",
     "duration": "6 hours",
