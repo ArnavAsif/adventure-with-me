@@ -26,7 +26,7 @@ const Navbar = () => {
         {
             user &&
             <>
-                <li><a>Update Profile</a></li>
+                <li><NavLink to='/updateProfile'>Update Profile</NavLink></li>
                 <li><NavLink to='/userProfile'>User Profile</NavLink></li>
 
             </>
@@ -47,7 +47,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Adventure With Us</a>
+                <Link to='/' className="btn btn-ghost text-xl">Adventure With Us</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

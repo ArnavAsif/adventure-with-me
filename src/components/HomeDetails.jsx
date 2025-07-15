@@ -1,7 +1,7 @@
 
 import { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Virtual, Navigation } from 'swiper/modules';
+import { Virtual, Navigation, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,24 +10,25 @@ import { Link } from 'react-router';
 
 const HomeDetails = () => {
     const { adventureData } = useContext(HomeDataContext);
-
-
-
     return (
         <div className="py-12 px-4 text-center">
-            <h2 className="text-3xl text-white mb-8">Virtual Slider (Adventure)</h2>
+            <h2 className="text-3xl font-bold text-black mb-8 text-start">Features: </h2>
 
             <Swiper
-                modules={[Virtual, Navigation]}
+                modules={[Virtual, Navigation, Autoplay]}
                 slidesPerView={2}
-                spaceBetween={30}
+                spaceBetween={60}
+                autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false
+                }}
                 navigation
                 virtual
                 className="max-w-4xl mx-auto"
             >
                 {adventureData.map((data, index) => (
                     <SwiperSlide key={index} virtualIndex={index}>
-                        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden max-w-lg hover:shadow-lg transition-all duration-300 flex flex-col">
                             <img
                                 src={data.image}
                                 alt={data.adventureTitle}

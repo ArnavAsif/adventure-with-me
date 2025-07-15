@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import Slider from "./Slider";
 import HomeDetails from "./HomeDetails";
+import HomeEcho from "./HomeEcho";
+import HomeTips from "./HomeTips";
 
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -24,6 +26,8 @@ const HomePage = () => {
         <HomeDataContext.Provider value={homeDataInfo}>
             <Slider></Slider>
             <HomeDetails></HomeDetails>
+            <HomeEcho></HomeEcho>
+            <HomeTips></HomeTips>
         </HomeDataContext.Provider>
     );
 };

@@ -6,7 +6,7 @@ const ExploreMore = () => {
     const idPar = parseInt(id);
     const data = useLoaderData();
     const allData = data.find(item => item.id === idPar)
-    const { image, adventureTitle, shortDescription, maxGroupSize, adventureCost, specialInstructions } = allData
+    const { image, adventureTitle, shortDescription, maxGroupSize, adventureCost, specialInstructions, location, includedItems } = allData
 
     return (
         <div className="hero bg-base-200 p-8">
@@ -21,6 +21,17 @@ const ExploreMore = () => {
                     <p className="py-6 font-bold">
                         Description:  {shortDescription}
                     </p>
+                    <div className="p-3">
+                        <p className="text-lg font-bold mb-5">Locations: </p>
+                        <p className="badge badge-soft badge-primary block mb-2">#{location}</p>
+                        
+                    </div>
+                    <div className="p-3">
+                        <p className="text-lg font-bold mb-5">Included Items: </p>
+                        {
+                            includedItems.map(item => <p className="badge badge-soft badge-success mb-2">#{item}</p>)
+                        }
+                    </div>
                     <div className="p-3">
                         <p className="text-lg font-bold mb-5">Special Instructions: </p>
                         {

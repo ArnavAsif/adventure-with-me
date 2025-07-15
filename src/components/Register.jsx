@@ -3,6 +3,8 @@ import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../utilities/firebase.init";
 
 
 const Register = () => {
@@ -23,11 +25,22 @@ const Register = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        const name = e.target.name.value;
+        const photoUrl = e.target.photoUrl.value;
         // Your register logic here
         console.log(email, password);
         signUpUser(email, password)
         .then(result => {
-            
+            updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: photoUrl
+            })
+            .then(()=>{
+                // profile update
+            })
+            .catch(err =>
+                console.log(err)
+            )
             console.log(result.user);
             navigate('/login')
         })
@@ -66,7 +79,14 @@ const Register = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input
                         type="text"
+                        name="name"
                         placeholder="Name"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    />
+                    <input
+                        type="text"
+                        name="photoUrl"
+                        placeholder="PhotoURL"
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                     />
                     <input

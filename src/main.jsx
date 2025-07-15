@@ -14,6 +14,7 @@ import Register from './components/Register.jsx';
 import UserProfile from './components/UserProfile.jsx';
 import PrivateRoutes from './privateRoutes/PrivateRoutes.jsx';
 import ExploreMore from './components/ExploreMore.jsx';
+import UpdateProfile from './components/UpdateProfile.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -37,8 +38,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/explore/:id',
-        element: <ExploreMore></ExploreMore>,
+        element: <PrivateRoutes><ExploreMore></ExploreMore></PrivateRoutes>,
         loader: ()=> fetch('../public/adventureData.json')
+      },
+      {
+        path: '/updateProfile',
+        element: <UpdateProfile></UpdateProfile>
       }
     ]
   },
