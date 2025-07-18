@@ -16,9 +16,12 @@ const Navbar = () => {
             .then(() => {
                 toast.success('sign out success')
             })
-            .catch(error => (
-                console.log(error)
-            ))
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // console.log(error)
+            }
+               
+            )
     }
 
     const links = <>

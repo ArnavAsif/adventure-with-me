@@ -14,25 +14,29 @@ const Register = () => {
 
     const handleGoogleRegister = () => {
         googleLogin()
+            // eslint-disable-next-line no-unused-vars
             .then(result => {
                 toast.success('Login with Google Success')
-                console.log(result.user)
+                // console.log(result.user)
                 navigate('/')
             })
+            // eslint-disable-next-line no-unused-vars
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
     };
 
     const handleGithubRegister = () => {
         githubLogin()
+            // eslint-disable-next-line no-unused-vars
             .then(result => {
                 toast.success('Login with GitHub Success')
-                console.log(result.user)
+                
                 navigate('/')
             })
+            // eslint-disable-next-line no-unused-vars
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
     };
 
@@ -43,8 +47,9 @@ const Register = () => {
         const name = e.target.name.value;
         const photoUrl = e.target.photoUrl.value;
         // Your register logic here
-        console.log(email, password);
+        
         signUpUser(email, password)
+            // eslint-disable-next-line no-unused-vars
             .then(result => {
                 updateProfile(auth.currentUser, {
                     displayName: name,
@@ -53,14 +58,18 @@ const Register = () => {
                     .then(() => {
                         // profile update
                     })
-                    .catch(err =>
-                        console.log(err)
+                    // eslint-disable-next-line no-unused-vars
+                    .catch(err =>{
+                        // console.log(err)
+                    }
+                        
                     )
-                console.log(result.user);
+                
                 navigate('/login')
             })
+            // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                console.log(error)
+                // console.log(error)
             })
     };
 

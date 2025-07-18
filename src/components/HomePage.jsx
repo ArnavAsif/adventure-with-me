@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Slider from "./Slider";
-import HomeDetails from "./HomeDetails";
-import HomeEcho from "./HomeEcho";
 import HomeTips from "./HomeTips";
+const HomeDetails = lazy(()=> import("./HomeDetails"));
+const HomeEcho = lazy(()=> import("./HomeEcho"));
 
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -13,7 +13,7 @@ const HomePage = () => {
     const [adventureData , setAdventureData] = useState([])
 
     useEffect(()=>{
-        fetch('../../public/adventureData.json')
+        fetch('./adventureData.json')
         .then(res => res.json())
         .then(data => setAdventureData(data))
     },[])
@@ -25,8 +25,12 @@ const HomePage = () => {
     return (
         <HomeDataContext.Provider value={homeDataInfo}>
             <Slider></Slider>
-            <HomeDetails></HomeDetails>
-            <HomeEcho></HomeEcho>
+            <Suspense fallback={<div>Loading Features...</div>}>
+                <HomeDetails></HomeDetails>
+            </Suspense>
+            <Suspense fallback={<div>Loading Features...</div>}>
+                <HomeEcho></HomeEcho>
+            </Suspense>
             <HomeTips></HomeTips>
         </HomeDataContext.Provider>
     );

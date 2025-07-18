@@ -10,31 +10,35 @@ const Login = () => {
     
 
     const { signInUser, googleLogin, githubLogin} = useContext(AuthContext)
-    console.log(githubLogin)
+    
 
     const navigate = useNavigate();
 
     const handleGoogleLogin = () => {
        googleLogin()
+       // eslint-disable-next-line no-unused-vars
        .then(result=>{
         toast.success('Login with Google Success')
-        console.log(result.user)
+        // console.log(result.user)
         navigate('/')
        })
+       // eslint-disable-next-line no-unused-vars
        .catch(err =>{
-        console.log(err)
+        // console.log(err)
        })
     };
 
     const handleGithubLogin = () => {
         githubLogin()
+       // eslint-disable-next-line no-unused-vars
        .then(result=>{
         toast.success('Login with GitHub Success')
-        console.log(result.user)
+        // console.log(result.user)
         navigate('/')
        })
+       // eslint-disable-next-line no-unused-vars
        .catch(err =>{
-        console.log(err)
+        // console.log(err)
        })
     };
     const handleLogin = e => {
@@ -43,14 +47,16 @@ const Login = () => {
         const password = e.target.password.value;
 
         signInUser(email, password)
+            // eslint-disable-next-line no-unused-vars
             .then(result => {
                 toast.success('Login Success')
                 e.target.reset();
                 navigate('/')
-                console.log(result.user);
+                // console.log(result.user);
             })
+            // eslint-disable-next-line no-unused-vars
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
     }
 
